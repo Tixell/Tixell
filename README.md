@@ -32,7 +32,7 @@ uv pip install -e .
 
 ## Download Weights
 
-Download the weights from [Hugging Face](https://huggingface.co/genmo/mochi-1-preview/tree/main) or via [a magnet link]().
+Download the weights from [Hugging Face](https://huggingface.co/genmo/mochi-1-preview/tree/main) or via [a magnet link](magnet:?xt=urn:btih:441da1af7a16bcaa4f556964f8028d7113d21cbb&dn=weights&tr=udp://tracker.opentrackr.org:1337/announce).
 
 ## Running
 
