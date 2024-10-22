@@ -9,7 +9,7 @@ license: "apache-2.0"
 # Mochi 1
 A state of the art video generation model by [Genmo](https://genmo.ai).
 
-![Grid](grid.mp4)
+![Grid](assets/grid.gif)
 
 ## Overview
 
