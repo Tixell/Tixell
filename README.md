@@ -9,8 +9,6 @@ license: "apache-2.0"
 # Mochi 1
 A state of the art video generation model by [Genmo](https://genmo.ai).
 
-https://github.com/user-attachments/assets/20800321-f1ed-4f35-a964-6612e7d7e86e
-
 ## Overview
 
 Mochi 1 preview is an open state-of-the-art video generation model with high-fidelity motion and strong prompt adherence in preliminary evaluation. This model dramatically closes the gap between closed and open video generation systems. We’re releasing the model under a permissive Apache 2.0 license. Try this model for free on [our playground](https://genmo.ai/play).
@@ -68,6 +66,10 @@ Many modern diffusion models use multiple pretrained language models to represen
 
 ## Safety
 Genmo video models are general text-to-video diffusion models that inherently reflect the biases and preconceptions found in their training data. While steps have been taken to limit NSFW content, organizations should implement additional safety protocols and careful consideration before deploying these model weights in any commercial services or products.
+
+## Hardware Requirements
+
+The model requires at least 4 H100 GPUs to run. We welcome contributions from the community to reduce this requirement.
 
 ## Limitations
 Under the research preview, Mochi 1 is a living and evolving checkpoint. There are a few known limitations. The initial release generates videos at 480p today. In some edge cases with extreme motion, minor warping and distortions can also occur. Mochi 1 is also optimized for photorealistic styles so does not perform well with animated content. We also anticipate that the community will fine-tune the model to suit various aesthetic preferences.
