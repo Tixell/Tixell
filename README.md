@@ -5,6 +5,7 @@ tags:
 - video
 license: "apache-2.0"
 pipeline_tag: text-to-video
+library_name: mochi
 ---
 
 # Mochi 1 Preview
