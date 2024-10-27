@@ -1,11 +1,11 @@
 ---
-language:
- - "en"
-tags:
-- video
-license: "apache-2.0"
-pipeline_tag: text-to-video
-library_name: mochi-1-preview
+license: apache-2.0
+pipeline_tag: image-to-image
+datasets:
+- neuralwork/arxiver
+- fka/awesome-chatgpt-prompts
+- nvidia/OpenMathInstruct-2
+- lmms-lab/LLaVA-Video-178K
 ---
 
 # Mochi 1 Preview
