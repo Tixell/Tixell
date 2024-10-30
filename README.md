@@ -1,11 +1,14 @@
 ---
 language:
- - "en"
+- en
+- ms
 tags:
 - video
-license: "apache-2.0"
+license: apache-2.0
 pipeline_tag: text-to-video
 library_name: genmo
+base_model:
+- genmo/mochi-1-preview
 ---
 
 # Mochi 1 Preview
