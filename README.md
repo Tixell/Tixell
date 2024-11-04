@@ -1,11 +1,11 @@
 ---
-language:
- - "en"
 tags:
 - video
-license: "apache-2.0"
+license: apache-2.0
 pipeline_tag: text-to-video
 library_name: genmo
+base_model:
+- nvidia/Llama-3.1-Nemotron-70B-Instruct-HF
 ---
 
 # Mochi 1 Preview
