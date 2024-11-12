@@ -52,6 +52,58 @@ python3 -m mochi_preview.infer --prompt "A hand with delicate fingers picks up a
 
 Replace `<path_to_model_directory>` with the path to your model directory.
 
+## Running with Diffusers
+
+Install the latest version of Diffusers
+
+```shell
+pip install git+https://github.com/huggingface/diffusers.git
+```
+
+The following example requires 42GB VRAM but ensures the highest quality output.
+
+```python
+import torch
+from diffusers import MochiPipeline
+from diffusers.utils import export_to_video
+
+pipe = MochiPipeline.from_pretrained("genmo/mochi-1-preview")
+
+# Enable memory savings
+pipe.enable_model_cpu_offload()
+pipe.enable_vae_tiling()
+
+prompt = "Close-up of a chameleon's eye, with its scaly skin changing color. Ultra high resolution 4k."
+
+with torch.autocast("cuda", torch.bfloat16, cache_enabled=False):
+      frames = pipe(prompt, num_frames=84).frames[0]
+
+export_to_video(frames, "mochi.mp4", fps=30)
+```
+
+### Using a lower precision variant to save memory
+
+The following example will use the `bfloat16` variant of the model and requires 22GB VRAM to run. There is a slight drop in the quality of the generated video as a result.
+
+```python
+import torch
+from diffusers import MochiPipeline
+from diffusers.utils import export_to_video
+
+pipe = MochiPipeline.from_pretrained("genmo/mochi-1-preview", variant="bf16", torch_dtype=torch.bfloat16)
+
+# Enable memory savings
+pipe.enable_model_cpu_offload()
+pipe.enable_vae_tiling()
+
+prompt = "Close-up of a chameleon's eye, with its scaly skin changing color. Ultra high resolution 4k."
+frames = pipe(prompt, num_frames=84).frames[0]
+
+export_to_video(frames, "mochi.mp4", fps=30)
+```
+
+To learn more check out the [Diffusers](https://huggingface.co/docs/diffusers/main/en/api/pipelines/mochi) documentation
+
 ## Model Architecture
 
 Mochi 1 represents a significant advancement in open-source video generation, featuring a 10 billion parameter diffusion model built on our novel Asymmetric Diffusion Transformer (AsymmDiT) architecture. Trained entirely from scratch, it is the largest video generative model ever openly released. And best of all, it’s a simple, hackable architecture.
