@@ -2,7 +2,8 @@
 language:
 - en
 tags:
-- video
+ - video
+ - genmo
 license: apache-2.0
 pipeline_tag: text-to-video
 library_name: diffusers
