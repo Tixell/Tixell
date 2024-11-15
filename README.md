@@ -1,6 +1,6 @@
 ---
 language:
-- en
+ - "en"
 tags:
  - video
  - genmo
