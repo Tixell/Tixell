@@ -2,10 +2,11 @@
 language:
  - "en"
 tags:
-- video
-license: "apache-2.0"
+ - video
+ - genmo
+license: apache-2.0
 pipeline_tag: text-to-video
-library_name: genmo
+library_name: diffusers
 ---
 
 # Mochi 1 Preview
