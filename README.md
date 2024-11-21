@@ -25,8 +25,8 @@ Clone the repository and install it in editable mode:
 Install using [uv](https://github.com/astral-sh/uv):
 
 ```bash
-git clone https://github.com/genmoai/models
-cd models
+git clone https://github.com/genmoai/mochi
+cd mochi
 pip install uv
 uv venv .venv
 source .venv/bin/activate
@@ -52,6 +52,25 @@ python3 -m mochi_preview.infer --prompt "A hand with delicate fingers picks up a
 ```
 
 Replace `<path_to_model_directory>` with the path to your model directory.
+
+## Model Architecture
+
+Mochi 1 represents a significant advancement in open-source video generation, featuring a 10 billion parameter diffusion model built on our novel Asymmetric Diffusion Transformer (AsymmDiT) architecture. Trained entirely from scratch, it is the largest video generative model ever openly released. And best of all, it’s a simple, hackable architecture.
+
+Alongside Mochi, we are open-sourcing our video VAE. Our VAE causally compresses videos to a 96x smaller size, with an 8x8 spatial and a 6x temporal compression to a 12-channel latent space.
+
+An AsymmDiT efficiently processes user prompts alongside compressed video tokens by streamlining text processing and focusing neural network capacity on visual reasoning. AsymmDiT jointly attends to text and visual tokens with multi-modal self-attention and learns separate MLP layers for each modality, similar to Stable Diffusion 3. However, our visual stream has nearly 4 times as many parameters as the text stream via a larger hidden dimension. To unify the modalities in self-attention, we use non-square QKV and output projection layers. This asymmetric design reduces inference memory requirements.
+Many modern diffusion models use multiple pretrained language models to represent user prompts. In contrast, Mochi 1 simply encodes prompts with a single T5-XXL language model.
+
+## Hardware Requirements
+
+Mochi 1 supports a variety of hardware platforms depending on quantization level, ranging from a single 3090 GPU up to multiple H100 GPUs.
+
+## Safety
+Genmo video models are general text-to-video diffusion models that inherently reflect the biases and preconceptions found in their training data. While steps have been taken to limit NSFW content, organizations should implement additional safety protocols and careful consideration before deploying these model weights in any commercial services or products.
+
+## Limitations
+Under the research preview, Mochi 1 is a living and evolving checkpoint. There are a few known limitations. The initial release generates videos at 480p today. In some edge cases with extreme motion, minor warping and distortions can also occur. Mochi 1 is also optimized for photorealistic styles so does not perform well with animated content. We also anticipate that the community will fine-tune the model to suit various aesthetic preferences.
 
 ## Running with Diffusers
 
@@ -104,26 +123,6 @@ export_to_video(frames, "mochi.mp4", fps=30)
 ```
 
 To learn more check out the [Diffusers](https://huggingface.co/docs/diffusers/main/en/api/pipelines/mochi) documentation
-
-## Model Architecture
-
-Mochi 1 represents a significant advancement in open-source video generation, featuring a 10 billion parameter diffusion model built on our novel Asymmetric Diffusion Transformer (AsymmDiT) architecture. Trained entirely from scratch, it is the largest video generative model ever openly released. And best of all, it’s a simple, hackable architecture.
-
-Alongside Mochi, we are open-sourcing our video VAE. Our VAE causally compresses videos to a 96x smaller size, with an 8x8 spatial and a 6x temporal compression to a 12-channel latent space.
-
-An AsymmDiT efficiently processes user prompts alongside compressed video tokens by streamlining text processing and focusing neural network capacity on visual reasoning. AsymmDiT jointly attends to text and visual tokens with multi-modal self-attention and learns separate MLP layers for each modality, similar to Stable Diffusion 3. However, our visual stream has nearly 4 times as many parameters as the text stream via a larger hidden dimension. To unify the modalities in self-attention, we use non-square QKV and output projection layers. This asymmetric design reduces inference memory requirements.
-Many modern diffusion models use multiple pretrained language models to represent user prompts. In contrast, Mochi 1 simply encodes prompts with a single T5-XXL language model.
-
-## Hardware Requirements
-
-Mochi 1 supports a variety of hardware platforms depending on quantization level, ranging from a single 3090 GPU up to multiple H100 GPUs.
-
-## Safety
-Genmo video models are general text-to-video diffusion models that inherently reflect the biases and preconceptions found in their training data. While steps have been taken to limit NSFW content, organizations should implement additional safety protocols and careful consideration before deploying these model weights in any commercial services or products.
-
-## Limitations
-Under the research preview, Mochi 1 is a living and evolving checkpoint. There are a few known limitations. The initial release generates videos at 480p today. In some edge cases with extreme motion, minor warping and distortions can also occur. Mochi 1 is also optimized for photorealistic styles so does not perform well with animated content. We also anticipate that the community will fine-tune the model to suit various aesthetic preferences.
-
 
 ## BibTeX
 ```
